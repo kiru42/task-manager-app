@@ -99,13 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       updateTask: function(event, id) {
         event.stopImmediatePropagation();
-        let task = this.tasks.find(item => item.id == id);
-        if (task) {
-          task.name = this.task.name;
-          task.description = this.task.description;
-          task.completed = this.task.completed;
-          this.message = `Task ${id} updated.`;
-        }
+        Api.updateTask(this.task).then(function(response) {
+          app.listTasks();
+          app.clear();
+          app.message = `Task ${response.id} updated.`;
+        });
       },
       deleteTask: function(event, id) {
         event.stopImmediatePropagation();
@@ -113,10 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let taskIndex = this.tasks.findIndex(item => item.id == id);
 
         if (taskIndex > -1) {
-          this.$delete(this.tasks, taskIndex);
-          this.message = `Task ${id} deleted.`;
+          Api.deleteTask(id).then(function(response) {
+            app.$delete(app.tasks, taskIndex);
+            app.message = `Task ${id} deleted.`;
+          });
         }
-        console.log('task deleted');
       }
     },
     beforeMount() {
