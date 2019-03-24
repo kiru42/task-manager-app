@@ -2,6 +2,33 @@
 
 ## Deploy to heroku
 
+### Gemfile
+
+```yaml
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") {5} %>
+  url: <%= ENV['DATABASE_URL'] %>
+```
+
+### database.yml
+
+```ruby
+# ...
+group :development, :test do
+  # ...
+  gem 'sqlite3', '~> 1.3.6'
+end
+# ...
+group :production do
+  gem 'pg'
+end
+# ...
+```
+
+### Heroku
+
 ```bash
 bundle install
 git add .
