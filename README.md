@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Deploy to heroku
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+bundle install
+git add .
+git commit -m "Preparing for Heroku deploy"
+heroku apps:create <YOUR_APP_NAME>
+heroku addons:create heroku-postgresql:hobby-dev
+git push heroku master
+heroku run rails db:master
+```
