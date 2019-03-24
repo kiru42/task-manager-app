@@ -2,7 +2,7 @@
 
 ## Deploy to heroku
 
-### Gemfile
+### database.yml
 
 ```yaml
 production:
@@ -12,7 +12,7 @@ production:
   url: <%= ENV['DATABASE_URL'] %>
 ```
 
-### database.yml
+### Gemfile
 
 ```ruby
 # ...
